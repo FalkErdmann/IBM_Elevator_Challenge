@@ -6,6 +6,6 @@ Bei der Logik habe ich mich aufgrund von Zeitmangel für die erste Variante ents
 
 Ich habe alles als ein kontinuierlich laufendes System implementiert, welches sich selbst immer wieder neue Anfragen stellt.
 
-Ansonsten habe ich versucht im Code alles so gut wie es geht zu kommentieren, aber wenn es noch gibt Fragen stehe ich gerne Rede und Antwort.
+Ansonsten habe ich versucht im Code alles so gut wie es geht zu kommentieren, aber wenn es noch Fragen gibt stehe ich gerne Rede und Antwort.
 
 Viel Spaß mit meinem Code!
