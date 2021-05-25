@@ -1,0 +1,72 @@
+int t = 0;
+        while(!checkAvailableElevators(0,elevators).equals("UNAVAILABLE")){
+            for (int i =0; i < requestList.size(); i++) {
+                // check if request is valid
+                if (requestList.get(i).checkValidRequest(requestList.get(i))) {
+                    // check if an elevator is currently available and get its index for elevators[]
+
+                    String targetElevator = checkAvailableElevators(requestList.get(i).getCurrentFloor(), elevators);
+                    int targetElevatorIndex = Integer.valueOf(targetElevator.replaceAll("[a-zA-Z]", ""));	
+
+                    //move elevator to pickupfloor, then move elevator to target floor
+                    int duration = elevators[i].getTravelDuration(requestList.get(i).getCurrentFloor(),requestList.get(i).getDestinationFloor(),elevators[targetElevatorIndex]);
+
+
+
+                }
+
+            }
+        }
+
+public void tick () {
+        if (targetFloor == currentFloor) {
+            System.out.println("")
+        }
+        else if (this.direction == "UP") this.currentFloor++;
+        else if (this.direction == "DOWN") this.currentFloor--;
+        else if (this.direction == "IDLE") System.out.println("Elevator " + this.id + " is idle.");
+    }
+
+
+public int getTravelDuration(int currentFloor, int destinationFloor, Elevator elevator) {
+        int distanceToPickUp = Math.abs(currentFloor-elevator.getCurrentFloor());
+        int distanceToDestination = Math.abs(currentFloor-destinationFloor);
+        return distanceToPickUp+distanceToDestination;
+    }
+
+
+@Override
+    public void run() {
+        System.out.println("Thread started");
+        if (targetFloor == currentFloor) {
+            this.direction ="IDLE";
+        }
+        else if (this.direction == "UP") {
+            this.currentFloor++;
+            System.out.println(this.getId()+" moved up to "+this.currentFloor);
+        }
+        else if (this.direction == "DOWN") {
+            this.currentFloor--;
+            System.out.println(this.getId()+" moved down to "+this.currentFloor);
+        }
+        else if (this.direction == "IDLE") System.out.println("Elevator " + this.id + " is idle.");
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void moveToTargetFloor(int targetFloor){
+        System.out.println("Method called: moveToTargetFloor");
+            this.targetFloor=targetFloor;
+            if(currentFloor<targetFloor){
+                this.direction = "UP";
+            } else if(currentFloor>targetFloor){
+                this.direction = "DOWN";
+            } else {
+                this.direction = "IDLE";
+                System.out.println("Elevator set to IDLE");
+            }
+            while(this.direction!="IDLE") run();
+    }
